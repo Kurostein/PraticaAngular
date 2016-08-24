@@ -23,6 +23,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\semantic.css" />
+    <Content Include="css\themes\basic\assets\fonts\icons.svg" />
+    <Content Include="css\themes\default\assets\fonts\icons.svg" />
+    <Content Include="css\themes\default\assets\images\flags.png" />
     <Content Include="fase1.html" />
     <Content Include="index.html" />
     <Content Include="js\angular.js" />
@@ -35,6 +38,14 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="css\themes\basic\assets\fonts\icons.ttf" />
+    <Content Include="css\themes\basic\assets\fonts\icons.woff" />
+    <Content Include="css\themes\default\assets\fonts\icons.eot" />
+    <Content Include="css\themes\default\assets\fonts\icons.otf" />
+    <Content Include="css\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="css\themes\default\assets\fonts\icons.woff" />
+    <Content Include="css\themes\default\assets\fonts\icons.woff2" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
