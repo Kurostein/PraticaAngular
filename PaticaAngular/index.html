@@ -26,48 +26,62 @@
         </div>
 
         <div class="ui headmargin container">
-            <div class="ui form">
-                <div class="inline fields">
-                    <div class="field">
-                        <label>Name:</label>
-                        <input type="text" ng-model="client.name" placeholder="Client name" />
+            
+            <div class="ui segment">
+                <div class="ui horizontal segments">
+                    <div class="ui segment">
+                        <form class="ui form">
+                            <div class="inline fields">
+                                <div class="field">
+                                    <label>Name:</label>
+                                    <input type="text" ng-model="client.name" placeholder="Client name" />
+                                </div>
+                                <div class="field">
+                                    <label>Tel:</label>
+                                    <input type="text" ng-model="client.tel" placeholder="Telephone" />
+                                </div>
+                                <div class="field">
+                                    <button class="ui positive basic submit button" ng-hide="editing" ng-click="add(client);"><i class="add user icon"></i>Add</button>
+                                    <button class="ui positive basic submit button" ng-show="editing" ng-click="save(client);"><i class="write icon"></i>Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="field">
-                        <label>Tel:</label>
-                        <input type="text" ng-model="client.tel" placeholder="Telephone" />
+                    <div class="ui center aligned segment">
+                        <div class="ui left icon input">
+                            <input type="text" ng-model="search" placeholder="Search users...">
+                            <i class="users icon"></i>
+                        </div>              
                     </div>
-                    <div class="field">
-                        <button class="ui positive basic submit button" ng-hide="editing" ng-click="add(client);"><i class="add user icon"></i>Add</button>
-                        <button class="ui positive basic submit button" ng-show="editing" ng-click="save(client);"><i class="write icon"></i>Save</button>
-                    </div>                    
                 </div>
-            </div>
-            <div class="ui two column fluid grid padded segment">
-                <div class="column">
-                    <h2 class="ui header">Clients:</h2>
-                    <table class="ui celled striped table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Tel</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="client in clients">
-                                <td class="ui six wide" ng-bind="client.name"></td>
-                                <td class="center aligned collapsing" ng-bind="client.tel"></td>
-                                <td class="center aligned collapsing">
-                                    <button class="circular ui basic blue icon button" ng-click="edit(client);"><i class="edit icon"></i></button>
-                                    <button class="circular ui basic negative icon button" ng-click="delete(client);"><i class="remove user icon"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                
+                <div class="ui two column fluid grid padded">
+                    <div class="column">
+                        <h2 class="ui header">Clients:</h2>
+                        <table class="ui celled striped table">
+                            <thead>
+                                <tr>
+                                    <th ng-click="orderBy('name');" style="cursor:pointer">Name</th>
+                                    <th ng-click="orderBy('tel');" style="cursor:pointer">Tel</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="client in clients | filter: search | orderBy: order:reverse">
+                                    <td class="ui six wide" ng-bind="client.name"></td>
+                                    <td class="center aligned collapsing" ng-bind="client.tel"></td>
+                                    <td class="center aligned collapsing">
+                                        <button class="circular ui basic blue icon button" ng-click="edit(client);"><i class="edit icon"></i></button>
+                                        <button class="circular ui basic negative icon button" ng-click="delete(client);"><i class="remove user icon"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="column">
+                    <div class="column">
 
+                    </div>
                 </div>
             </div>
         </div>

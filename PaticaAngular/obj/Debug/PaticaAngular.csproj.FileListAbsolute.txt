@@ -10,3 +10,15 @@ C:\Users\Cloud\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngula
 C:\Users\Cloud\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.csprojResolveAssemblyReference.cache
 C:\Users\Cloud\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.dll
 C:\Users\Cloud\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.pdb
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.dll.config
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.dll
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.pdb
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.csprojResolveAssemblyReference.cache
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.dll
+C:\Users\Hileo MSI\Documents\Visual Studio 2015\Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.pdb
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.dll.config
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.dll
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\bin\PaticaAngular.pdb
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.csprojResolveAssemblyReference.cache
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.dll
+C:\Users\Cloud\Dev Projects\PraticaAngular\PaticaAngular\obj\Debug\PaticaAngular.pdb

@@ -13,6 +13,9 @@
     controller.edit = Edit;
     controller.save = Save;
     controller.delete = Delete;
+    controller.orderBy = OrderBy;
+
+    controller.order = 'name';
 
     function Add(client) {
         if (client.name != "" && client.tel != ""){
@@ -36,5 +39,10 @@
 
     function Delete(client) {
         controller.clients.splice(controller.clients.indexOf(client), 1);
+    }
+
+    function OrderBy(colName) {
+        controller.order = colName;
+        controller.reverse = !controller.reverse;
     }
 });
