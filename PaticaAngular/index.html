@@ -14,6 +14,12 @@
             margin-top: 20px;
         }
     </style>
+
+    <script src="js/angular.js"></script>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script src="js/semantic.js"></script>
+    <script src="js/module/pizza-module.js"></script>
+    <script src="js/controllers/pizza-controller.js"></script>
 </head>
 <body>
     <section ng-controller="myPizzaController">
@@ -28,36 +34,16 @@
         <div class="ui headmargin container">
             
             <div class="ui segment">
-                <div class="ui horizontal segments">
-                    <div class="ui segment">
-                        <form class="ui form">
-                            <div class="inline fields">
-                                <div class="field">
-                                    <label>Name:</label>
-                                    <input type="text" ng-model="client.name" placeholder="Client name" />
-                                </div>
-                                <div class="field">
-                                    <label>Tel:</label>
-                                    <input type="text" ng-model="client.tel" placeholder="Telephone" />
-                                </div>
-                                <div class="field">
-                                    <button class="ui positive basic submit button" ng-hide="editing" ng-click="add(client);"><i class="add user icon"></i>Add</button>
-                                    <button class="ui positive basic submit button" ng-show="editing" ng-click="save(client);"><i class="write icon"></i>Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="ui center aligned segment">
-                        <div class="ui left icon input">
-                            <input type="text" ng-model="search" placeholder="Search users...">
-                            <i class="users icon"></i>
-                        </div>              
-                    </div>
+                <div class="ui text segment">
+                    <div class="ui left icon fluid input">
+                        <input type="text" ng-model="search" placeholder="Search users...">
+                        <i class="users icon"></i>
+                    </div>              
                 </div>
                 
                 <div class="ui two column fluid grid padded">
                     <div class="column">
-                        <h2 class="ui header">Clients:</h2>
+                        <h2 class="ui blue header">Clients list:</h2>
                         <table class="ui celled striped table">
                             <thead>
                                 <tr>
@@ -80,18 +66,30 @@
                     </div>
 
                     <div class="column">
-
+                        <h2 class="ui green header">Add a new client!</h2>
+                        <div class="ui segment">
+                            <form class="ui form" name="formClient">
+                                <div class="field">
+                                    <label>Name</label>
+                                    <input type="text" ng-model="client.name" name="name" placeholder="Client name" />
+                                </div>
+                                <div class="field">
+                                    <label>Telephone</label>
+                                    <input type="text" ng-model="client.tel" name="tel" placeholder="Telephone" />
+                                </div>
+                                <div class="field">
+                                    <button class="ui primary submit button" ng-hide="editing" ng-disabled="formClient.$invalid" ng-click="add(client); formClient.$setPristine();"><i class="add user icon"></i>Add</button>
+                                    <button class="ui basic reset button" ng-hide="editing">Reset</button>
+                                    <button class="ui primary submit button" ng-show="editing" ng-disabled="formClient.$invalid" ng-click="save(client); formClient.$setPristine();"><i class="write icon"></i>Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="js/angular.js"></script>
-    <script src="js/jquery-3.1.0.js"></script>
-    <script src="js/semantic.js"></script>
-    <script src="js/module/pizza-module.js"></script>
-    <script src="js/controllers/pizza-controller.js"></script>
 
 </body>
 </html>

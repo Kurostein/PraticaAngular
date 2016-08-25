@@ -20,21 +20,22 @@
     function Add(client) {
         if (client.name != "" && client.tel != ""){
             controller.clients.push(angular.copy(client));
-            delete controller.client;
+            delete controller.client;            
         }            
         else
             return;
     }
 
     function Edit(client) {        
-        controller.client = client;
         controller.editing = true;
+        controller.client = client;
     }
 
     function Save(client) {
         client = angular.copy(controller.client);
         controller.editing = false;
         delete controller.client;
+        
     }
 
     function Delete(client) {
@@ -45,4 +46,42 @@
         controller.order = colName;
         controller.reverse = !controller.reverse;
     }
+});
+
+$(function () {
+    $(".ui.form")
+        .form({
+            inline: true,
+            on: 'blur',
+            fields: {                
+                name: {
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'The field {name} cannot be empty.'
+                        },
+                        {
+                            type: 'minLength[3]',
+                            ruleValue: 3
+                        }
+                    ]
+                },
+                tel: {
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'The field {name} cannont be empty.'
+                        },
+                        {
+                            type: 'minLength[9]',
+                            ruleValue: 9
+                        },
+                        {
+                            type: 'maxLength[10]',
+                            ruleValue: 10
+                        }
+                    ]
+                }
+            }
+        });
 });
