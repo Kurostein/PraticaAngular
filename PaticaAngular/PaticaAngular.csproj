@@ -29,6 +29,7 @@
     <Content Include="fase1.html" />
     <Content Include="index.html" />
     <Content Include="js\angular.js" />
+    <Content Include="js\validation\form-validation.js" />
     <Content Include="js\controllers\hello-controller.js" />
     <Content Include="js\controllers\pizza-controller.js" />
     <Content Include="js\jquery-3.1.0.js" />
