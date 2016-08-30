@@ -1,8 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    module.controller("myPizzaController", function ($scope) {
+    module.controller("myPizzaController", function ($scope, $http, $q) {
         var controller = $scope;
+        var url = 'http://localhost:2020/';
 
         var registrationForm = $('.ui.form');
 
@@ -19,17 +20,73 @@
         controller.save = Save;
         controller.delete = Delete;
         controller.orderBy = OrderBy;
-
+        controller.list = ListClients();
+        
         controller.order = 'name';
     
+        function ListClients() {
+            var serviceUrl = 'client';
+
+            $http.get(url.concat(serviceUrl))
+                .success(function (data, status) {
+                    console.log(status);
+                    controller.clients = data;
+                });
+        }
+
         function Add() {
             if (registrationForm.form('is valid')) {
                 var client = registrationForm.form('get values');
-                controller.clients.push(client);
-                registrationForm.form('clear');
-            }
-            else
+
+                PostClient(client, 'client')
+                    .then(function (status) {
+                        if (status === 200) {
+                            //controller.clients.push(client);
+                            registrationForm.form('clear');
+                            ListClients();
+                        } else {
+                            alert('Error to insert client.');
+                            ListClients();
+                        }
+                    });
+            } else
                 return;
+        }
+
+        function PostClient(client, serviceUrl) {
+            var json = JSON.stringify(client);
+            var deferred = $q.defer();
+            
+            setTimeout(function () {
+                $http.post(url.concat(serviceUrl), json)
+                .success(function (data, status) {
+                    deferred.resolve(status);
+                    console.log('Deu certo!!');
+                }).error(function (data, status) {
+                    deferred.reject(status);
+                    console.log('Deu erro...');
+                });
+            }, 5000);
+            
+            return deferred.promise;
+        }
+
+        function PutClient(client, serviceUrl) {
+            var json = JSON.stringify(client);
+            var deferred = $q.defer();
+
+            setTimeout(function () {
+                $http.put(url.concat(serviceUrl), json)
+                .success(function (data, status) {
+                    deferred.resolve(status);
+                    console.log('Deu certo!!');
+                }).error(function (data, status) {
+                    deferred.reject(status);
+                    console.log('Deu erro...');
+                });
+            }, 5000);
+
+            return deferred.promise;
         }
 
         function Edit(client) {
@@ -38,11 +95,25 @@
             registrationForm.form('set values', client);
         }
 
-        function Save(client) {        
-            controller.clients.splice(controller.clients.indexOf(client), 1, registrationForm.form('get values'));
-            registrationForm.form('clear');
-            controller.editing = false;
-            delete controller.client;
+        function Save() {        
+            var editedClient = registrationForm.form('get values');
+            editedClient.Id = controller.client.Id;
+            //controller.clients.splice(controller.clients.indexOf(client), 1, editedClient);
+            PutClient(editedClient, 'client')
+                .then(function (status) {
+                    if (status === 200) {
+                        registrationForm.form('clear');
+                        controller.editing = false;
+                        delete controller.client;
+                        ListClients();
+                    } else {
+                        alert("Update error.");
+                        registrationForm.form('clear');
+                        controller.editing = false;
+                        delete controller.client;
+                        ListClients();
+                    }
+                });
         }
 
         function Delete(client) {
