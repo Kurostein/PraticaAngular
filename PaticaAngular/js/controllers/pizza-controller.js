@@ -21,17 +21,28 @@
         controller.delete = Delete;
         controller.orderBy = OrderBy;
         controller.list = ListClients();
-        
+
         controller.order = 'name';
     
         function ListClients() {
-            var serviceUrl = 'client';
+            HttpGet().then(function (data) {
+                controller.clients = data;
+            });            
+        }
 
+        function HttpGet() {
+            var serviceUrl = 'client';
+            var deferred = $q.defer();
             $http.get(url.concat(serviceUrl))
                 .success(function (data, status) {
-                    console.log(status);
-                    controller.clients = data;
+                    deferred.resolve(data);
+                    console.log(status + ' Listou!');
+                })
+                .error(function (data, status) {
+                    deferred.reject(status);
+                    console.log(status + ' Erro na lista!');
                 });
+            return deferred.promise;
         }
 
         function Add() {
@@ -57,16 +68,14 @@
             var json = JSON.stringify(client);
             var deferred = $q.defer();
             
-            setTimeout(function () {
-                $http.post(url.concat(serviceUrl), json)
-                .success(function (data, status) {
-                    deferred.resolve(status);
-                    console.log('Deu certo!!');
-                }).error(function (data, status) {
-                    deferred.reject(status);
-                    console.log('Deu erro...');
-                });
-            }, 5000);
+            $http.post(url.concat(serviceUrl), json)
+            .success(function (data, status) {
+                deferred.resolve(status);
+                console.log('Deu certo!!');
+            }).error(function (data, status) {
+                deferred.reject(status);
+                console.log('Deu erro...');
+            });
             
             return deferred.promise;
         }
@@ -75,16 +84,14 @@
             var json = JSON.stringify(client);
             var deferred = $q.defer();
 
-            setTimeout(function () {
-                $http.put(url.concat(serviceUrl), json)
-                .success(function (data, status) {
-                    deferred.resolve(status);
-                    console.log('Deu certo!!');
-                }).error(function (data, status) {
-                    deferred.reject(status);
-                    console.log('Deu erro...');
-                });
-            }, 5000);
+            $http.put(url.concat(serviceUrl), json)
+            .success(function (data, status) {
+                deferred.resolve(status);
+                console.log('Deu certo!!');
+            }).error(function (data, status) {
+                deferred.reject(status);
+                console.log('Deu erro...');
+            });
 
             return deferred.promise;
         }
@@ -97,7 +104,7 @@
 
         function Save() {        
             var editedClient = registrationForm.form('get values');
-            editedClient.Id = controller.client.Id;
+            editedClient.id = controller.client.id;
             //controller.clients.splice(controller.clients.indexOf(client), 1, editedClient);
             PutClient(editedClient, 'client')
                 .then(function (status) {
@@ -116,8 +123,26 @@
                 });
         }
 
+        function HttpDelete(id, serviceUrl) {
+            var deferred = $q.defer();
+
+            $http.delete(url.concat(serviceUrl).concat('/' + id))
+                .success(function (data, status) {
+                    deferred.resolve(status);
+                    console.log(status + 'Deu certo!');
+                })
+                .error(function (data, status) {
+                    deferred.reject(status);
+                    console.log(status + "Erro!!");
+                });
+            return deferred.promise;
+        }
+
         function Delete(client) {
-            controller.clients.splice(controller.clients.indexOf(client), 1);
+            HttpDelete(client.id, 'client');
+            setTimeout(ListClients, 500);
+            
+            //controller.clients.splice(controller.clients.indexOf(client), 1);
         }
 
         function OrderBy(colName) {
