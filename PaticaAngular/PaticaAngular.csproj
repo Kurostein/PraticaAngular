@@ -22,13 +22,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
     <Content Include="css\semantic.css" />
     <Content Include="css\themes\basic\assets\fonts\icons.svg" />
     <Content Include="css\themes\default\assets\fonts\icons.svg" />
     <Content Include="css\themes\default\assets\images\flags.png" />
     <Content Include="fase1.html" />
-    <Content Include="index.html" />
+    <Content Include="index1.html" />
     <Content Include="js\angular.js" />
+    <Content Include="js\controllers\client-controller.js" />
+    <Content Include="js\directives\client.form.directive.js" />
+    <Content Include="js\directives\views\client.form.view.html" />
     <Content Include="js\validation\form-validation.js" />
     <Content Include="js\controllers\hello-controller.js" />
     <Content Include="js\controllers\pizza-controller.js" />

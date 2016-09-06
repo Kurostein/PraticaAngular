@@ -4,99 +4,34 @@
     <title></title>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="css/semantic.css" />
-    <style type="text/css">
-        .masthead.segment {
-          min-height: 100px;
-          padding: 1em 0em;
-        }
-        
-        .headmargin{
-            margin-top: 20px;
-        }
-    </style>    
 </head>
 <body>
-    <section ng-controller="myPizzaController">
-        <div class="ui inverted blue masthead vertical center aligned segment">
-            <div class="ui text container">
-                <div class="ui inverted header">
-                    <h1 ng-bind="name"></h1>                    
-                </div>
+    <section ng-controller="clientController as vm">
+        <div class="ui two column stackable grid container">
+            <div class="column">
+                <div class="ui padded segment container">
+                    <button class="ui add button">Add Client</button>
+                    <button class="ui edit button">Edit Client</button>
+                    <div class="ui inverted modal">
+                        <client-form></client-form>
+                    </div>                    
+                </div>                
+                <!--<div class="ui vertical divider"></div>-->
+            </div>                
+            <div class="column">
+                <div class="ui padded segment container">
+                    
+                </div>                    
             </div>
-        </div>
-
-        <div class="ui headmargin container">
-            
-            <div class="ui segment" style="background-color: lightcyan">
-                <div class="ui text segment">
-                    <div class="ui left icon fluid input">
-                        <input type="text" ng-model="search" placeholder="Search users...">
-                        <i class="users icon"></i>
-                    </div>              
-                </div>
-                
-                <div class="ui two column fluid grid padded">
-                    <div class="column">
-                        <h2 class="ui blue header">Clients list:</h2>
-                        <table class="ui celled striped table">
-                            <thead>
-                                <tr>
-                                    <th ng-click="orderBy('name');" style="cursor:pointer">Name</th>
-                                    <th ng-click="orderBy('tel');" style="cursor:pointer">Tel</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="client in clients | filter: search | orderBy: order:reverse">
-                                    <td class="ui six wide" ng-bind="client.name"></td>
-                                    <td class="center aligned collapsing" ng-bind="client.tel"></td>
-                                    <td class="center aligned collapsing">
-                                        <button class="circular ui basic blue icon button" ng-click="edit(client);"><i class="edit icon"></i></button>
-                                        <button class="circular ui basic negative icon button" ng-click="delete(client);"><i class="remove user icon"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="column">
-                        <h2 class="ui green header">Add a new client!</h2>
-                        <div class="ui segment">
-                            <div class="ui form">
-                                <div class="field">
-                                    <label>Name</label>
-                                    <div class="ui icon input">
-                                        <input type="text" name="name" placeholder="Client name">
-                                        <i class="asterisk red icon"></i>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label>Telephone</label>
-                                    <div class="ui icon input">
-                                        <input type="text" name="tel" placeholder="Telephone" />
-                                        <i class="asterisk red icon"></i>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <button class="ui primary button" ng-hide="editing" ng-click="add();"><i class="add user icon"></i>Add</button>
-                                    <button class="ui basic reset button" ng-hide="editing">Reset</button>
-                                    <button class="ui primary button" ng-show="editing" ng-click="save(client);"><i class="write icon"></i>Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>        
     </section>
 
+    <script src="js/angular.js"></script>
     <script src="js/jquery-3.1.0.js"></script>
     <script src="js/semantic.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/module/pizza-module.js"></script>
-    <script src="js/validation/form-validation.js"></script>
-    <script src="js/controllers/pizza-controller.js"></script>
 
+    <script src="js/module/pizza-module.js"></script>
+    <script src="js/controllers/client-controller.js"></script>
+    <script src="js/directives/client.form.directive.js"></script>
 </body>
 </html>
