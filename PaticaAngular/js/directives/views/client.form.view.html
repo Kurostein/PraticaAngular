@@ -1,18 +1,19 @@
-﻿<div class="ui centered container">
+﻿<div class="ui container">
     <div class="ui padded segment container">
-        <form class="ui form">
+        <div class="ui form">
             <div class="field">
                 <label>Nome</label>
                 <input type="text" name="name" ng-model="vm.client.name" />
             </div>
             <div class="field">
-                <label>Nome</label>
+                <label>Tel</label>
                 <input type="text" name="tel" ng-model="vm.client.tel" />
             </div>
-            <div class="ui buttons floating right">
-                <button class="ui save button" ng-click="vm.add();">Save</button>
-                <button class="ui cancel button">Cancel</button>
+            <div class="ui actions right floated">
+                <button class="ui primary ok button" ng-click="vm.add();">Save</button>
+                <button class="ui cancel button" ng-click="vm.clear();">Cancel</button>
             </div>
-        </form>
+        </div>
     </div>
+    <div ng-transclude></div>
 </div>

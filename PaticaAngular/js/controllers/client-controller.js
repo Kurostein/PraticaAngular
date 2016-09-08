@@ -5,18 +5,26 @@
         var vm = this;
         var url = 'http://localhost:2020/';
 
-        vm.client = { name: 'test', tel: '123123123'};
+        vm.client = {};
 
         vm.add = Add;
+        vm.clear = Clear;
+
+        function Clear() {
+            $('.ui.form').form('clear');
+                //.form('fields: { }')                
+        }
 
         function Add(client) {
             //if (registrationForm.form('is valid')) {
             //    var client = registrationForm.form('get values');
-            //var client = vm.client;
+            var client = vm.client;
                 PostClient(client, 'client')
                     .then(function (status) {
                         if (status === 200) {
-                            //controller.clients.push(client);
+                            $('.ui.form').form('clear');
+                            vm.client = {};
+                            //vm.clients.push(client);
                             //registrationForm.form('clear');
                             //ListClients();
                         } else {
@@ -24,7 +32,7 @@
                             //ListClients();
                         }
                     });
-            //} else
+            //}else
             //    return;
         }
 
@@ -43,9 +51,10 @@
 
             return deferred.promise;
         }
-    }
+    } 
 
     ClientController.$inject = ['$scope', '$http', '$q'];
 
     angular.module('myPizza').controller('clientController', ClientController);
+
 })();

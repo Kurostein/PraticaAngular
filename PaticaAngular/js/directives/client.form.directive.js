@@ -3,27 +3,66 @@
 
     const ClientForm = function () {
         return {
-            scope: {},
+            //scope: {},
+            transclude: true,
             templateUrl: './js/directives/views/client.form.view.html',
-            //controller: 'clientController as vm',
+            controller: 'clientController as vm',
             link: Link
         };
 
-        function Link(scope, element, attrs, clientController) {
-            ModalEvents('.add.button');
-            ModalEvents('.edit.button');
+        function Link(scope, element, attrs) {
+            ModalEvents(element, '.add.button');
+            ModalEvents(element, '.edit.button');
+            Validation();
             //$(element).modal('attach events', '.edit.button', 'show');
-            scope.client = clientController.client;
+            //scope.client = clientController.client;
         }
 
-        function ModalEvents(attrs) {
+        function ModalEvents(element, attrs) {
             $(element)
                 .modal({
-                    closable: false,
-                    onDeny: function () { console.log('cancelou'); },
-                    onApprove: clientController.add(scope.client)
+                    closable: false
                 })
                 .modal('attach events', attrs, 'show');
+        }
+
+        function Validation() {
+            $(".ui.form")
+                .form({
+                    inline: true,
+                    on: 'blur',
+                    revalidate: true,
+                    fields: {
+                        name: {
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'The field {name} cannot be empty.'
+                                },
+                                {
+                                    type: 'minLength[3]',
+                                    ruleValue: 3
+                                }
+                            ]
+                        },
+                        tel: {
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'The field {name} cannont be empty.'
+                                },
+                                {
+                                    type: 'minLength[9]',
+                                    ruleValue: 9
+                                },
+                                {
+                                    type: 'maxLength[10]',
+                                    ruleValue: 10
+                                }
+                            ]
+                        }
+                    }
+                });
         }
     }
 
