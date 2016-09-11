@@ -8,6 +8,8 @@
         var registrationForm = $('.ui.form');
 
         controller.name = "My Pizza";
+        
+        controller.client = {};
         controller.clients = [
             { name: "Peter", tel: "1234-1231" },
             { name: "Ann", tel: "2342-2341" },
@@ -45,23 +47,19 @@
             return deferred.promise;
         }
 
-        function Add() {
-            if (registrationForm.form('is valid')) {
-                var client = registrationForm.form('get values');
-
-                PostClient(client, 'client')
-                    .then(function (status) {
-                        if (status === 200) {
-                            //controller.clients.push(client);
-                            registrationForm.form('clear');
-                            ListClients();
-                        } else {
-                            alert('Error to insert client.');
-                            ListClients();
-                        }
-                    });
-            } else
-                return;
+        function Add(client) {
+            controller.client = client;
+            PostClient(client, 'client')
+                .then(function (status) {
+                    if (status === 200) {
+                        //controller.clients.push(client);
+                        registrationForm.form('clear');
+                        ListClients();
+                    } else {
+                        alert('Error to insert client.');
+                        ListClients();
+                    }
+                });
         }
 
         function PostClient(client, serviceUrl) {

@@ -3,35 +3,40 @@
 
     const ClientForm = function () {
         return {
-            //scope: {},
-            transclude: true,
-            templateUrl: './js/directives/views/client.form.view.html',
-            controller: 'clientController as vm',
+            restrict: 'E',
+            scope: {
+                model: '=clientModel',
+                submit: '&submitAction',
+                edit: '=editMode'
+            },
+            templateUrl: './js/directives/views/client.form.view.html',            
             link: Link
         };
 
         function Link(scope, element, attrs) {
-            ModalEvents(element, '.add.button');
-            ModalEvents(element, '.edit.button');
-            Validation();
-            //$(element).modal('attach events', '.edit.button', 'show');
-            //scope.client = clientController.client;
-        }
+            var elem = $(element);
 
-        function ModalEvents(element, attrs) {
+            scope.save = function(){
+                if(elem.form('is valid')){
+                    scope.submit({client: scope.model});
+                }else{
+                    alert('Formulário inválido!');
+                }
+            }
+
+            scope.cancel = function(){
+                elem.form('clear');
+                scope.client = {};
+            }
+
+            AddValidation(element);
+        }
+        
+        function AddValidation(element) {
             $(element)
-                .modal({
-                    closable: false
-                })
-                .modal('attach events', attrs, 'show');
-        }
-
-        function Validation() {
-            $(".ui.form")
                 .form({
                     inline: true,
                     on: 'blur',
-                    revalidate: true,
                     fields: {
                         name: {
                             rules: [
